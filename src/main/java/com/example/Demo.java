@@ -6,6 +6,8 @@ import com.example.entity.PokerType;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.Arrays.asList;
+
 public class Demo {
 
     public static final String FULL_HOUSE = "Full House";
@@ -18,6 +20,22 @@ public class Demo {
     public static final String STRAIGHT = "Straight";
     public static final String STRAIGHT_FLUSH = "Straight Flush";
     public static final String TIE = "Tie";
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String inputSentence = scanner.nextLine();
+        List<String> inputElements = asList(inputSentence.trim().split(" "));
+        List<PokerHands> white = new ArrayList<>();
+        List<PokerHands> black = new ArrayList<>();
+        Demo demo = new Demo();
+        for(int i=inputElements.indexOf("Black:")+1;i<inputElements.indexOf("White:");i++){
+            black.add(new PokerHands(demo.convetToNumber(inputElements.get(i).substring(0,1)),inputElements.get(i).substring(1,2)));
+        }
+        for(int i=inputElements.indexOf("White:")+1;i<inputElements.size();i++){
+            white.add(new PokerHands(demo.convetToNumber(inputElements.get(i).substring(0,1)),inputElements.get(i).substring(1,2)));
+        }
+        System.out.println(demo.run(white,black));
+    }
 
     public String run(List<PokerHands> white, List<PokerHands> black) {
         PokerType whitePokerType = judgePokerType(white);

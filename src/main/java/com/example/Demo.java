@@ -25,10 +25,47 @@ public class Demo {
         PokerType blackPokerType = judgePokerType(black);
         blackPokerType.setWinner("Black");
         PokerType winnerPoker = compare(whitePokerType, blackPokerType);
-        if (winnerPoker.getWinner().equals(TIE)) {
-            return "Tie.";
+        return outputResult(winnerPoker);
+    }
+
+    private String outputResult(PokerType winnerPoker) {
+        StringBuilder result = new StringBuilder();
+        result.append(winnerPoker.getWinner()).append(" wins. - with ");
+        switch (winnerPoker.getType()){
+            case HIGH_CARD:
+                result.append(HIGH_CARD);
+                break;
+            case PAIR:
+                result.append(PAIR);
+                break;
+            case TWO_PAIRS:
+                result.append(TWO_PAIRS);
+                break;
+            case THREE_OF_A_KIND:
+                result.append(THREE_OF_A_KIND);
+                break;
+            case STRAIGHT:
+                result.append(STRAIGHT);
+                break;
+            case FLUSH:
+                result.append(FLUSH);
+                break;
+            case FULL_HOUSE:
+                result.append(FULL_HOUSE);
+                break;
+            case FOUR_OF_A_KIND:
+                result.append(FOUR_OF_A_KIND);
+                break;
+            case STRAIGHT_FLUSH:
+                result.append(STRAIGHT_FLUSH);
+                break;
+            case TIE:
+                result.delete(0,result.length()).append(TIE).append(".");
+                break;
+            default:
+                break;
         }
-        return winnerPoker.getWinner()+" wins. - with "+winnerPoker.getType();
+        return result.toString();
     }
 
     public PokerType compare(PokerType firstPokerType, PokerType secondPokerType) {
@@ -42,13 +79,15 @@ public class Demo {
             } else {
                 for(int i=firstPokerType.getNumbers().size()-2;i>=0;i--){
                     if(firstPokerType.getNumbers().get(i)>secondPokerType.getNumbers().get(i)){
+                        firstPokerType.setMaxNumber(firstPokerType.getNumbers().get(i));
                         return firstPokerType;
                     }else if(firstPokerType.getNumbers().get(i)<secondPokerType.getNumbers().get(i)){
+                        secondPokerType.setMaxNumber(secondPokerType.getNumbers().get(i));
                         return secondPokerType;
                     }
                 }
                 PokerType poker = new PokerType();
-                poker.setWinner(TIE);
+                poker.setType(TIE);
                 return poker;
             }
         } else {
@@ -180,7 +219,7 @@ public class Demo {
         return result;
     }
 
-    public int convet(String input) {
+    public int convetToNumber(String input) {
         int result;
         switch (input) {
             case "J":

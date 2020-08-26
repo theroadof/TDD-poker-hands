@@ -107,6 +107,25 @@ public class Demo {
                 }
             }
             return pokerType;
+        } else if (numberMap.size() == 3) {
+            for (int index : mapKey) {
+                if (numberMap.get(index).size() == 3) {
+                    pokerType.setType("Three of a Kind");
+                    pokerType.setMaxNumber(index);
+                    break;
+                }
+            }
+            if (Objects.isNull(pokerType.getType())) {
+                pokerType.setType("Two Pairs");
+                Collections.sort(mapKey);
+                for(int i=mapKey.size()-1;i>=0;i--){
+                    if(numberMap.get(mapKey.get(i)).size()==2){
+                        pokerType.setMaxNumber(mapKey.get(i));
+                        break;
+                    }
+                }
+            }
+            return pokerType;
         } else {
             return null;
         }

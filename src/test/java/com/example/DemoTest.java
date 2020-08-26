@@ -105,6 +105,19 @@ public class DemoTest {
         assertEquals("White",result);
     }
 
+    @Test
+        void should_return_White_wins_with_Two_Pairs_when_run_given_Black_2H_3D_5S_9C_KD_and_White_3H_3D_5S_9C_5D() {
+        List<PokerHands> black = asList(new PokerHands(2,"H"),new PokerHands(3,"D"),new PokerHands(5,"S"),
+                new PokerHands(9,"C"),new PokerHands(demo.convet("K"),"D"));
+        List<PokerHands> white = asList(new PokerHands(3,"H"),new PokerHands(3,"D"),new PokerHands(5,"S"),
+                new PokerHands(9,"C"),new PokerHands(5,"D"));
+
+        //when
+        String result = demo.run(white,black);
+
+        //then
+        assertEquals("White",result);
+    }
 
     @Test
     void test2() {

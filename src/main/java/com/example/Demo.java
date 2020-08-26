@@ -118,8 +118,8 @@ public class Demo {
             if (Objects.isNull(pokerType.getType())) {
                 pokerType.setType("Two Pairs");
                 Collections.sort(mapKey);
-                for(int i=mapKey.size()-1;i>=0;i--){
-                    if(numberMap.get(mapKey.get(i)).size()==2){
+                for (int i = mapKey.size() - 1; i >= 0; i--) {
+                    if (numberMap.get(mapKey.get(i)).size() == 2) {
                         pokerType.setMaxNumber(mapKey.get(i));
                         break;
                     }
@@ -127,7 +127,19 @@ public class Demo {
             }
             return pokerType;
         } else {
-            return null;
+            for (int index : mapKey) {
+                if (numberMap.get(index).size() == 4) {
+                    pokerType.setType("Four of a Kind");
+                    pokerType.setMaxNumber(index);
+                    break;
+                }
+                if (numberMap.get(index).size() == 3) {
+                    pokerType.setType("Full House");
+                    pokerType.setMaxNumber(index);
+                    break;
+                }
+            }
+            return pokerType;
         }
     }
 

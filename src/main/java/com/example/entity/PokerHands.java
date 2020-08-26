@@ -13,15 +13,9 @@ public class PokerHands {
         return number;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
 
     public String getPokerColor() {
         return pokerColor;
     }
 
-    public void setPokerColor(String pokerColor) {
-        this.pokerColor = pokerColor;
-    }
 }

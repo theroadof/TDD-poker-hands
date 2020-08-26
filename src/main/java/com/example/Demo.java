@@ -8,16 +8,27 @@ import java.util.stream.Collectors;
 
 public class Demo {
 
+    public static final String FULL_HOUSE = "Full House";
+    public static final String FOUR_OF_A_KIND = "Four of a Kind";
+    public static final String TWO_PAIRS = "Two Pairs";
+    public static final String THREE_OF_A_KIND = "Three of a Kind";
+    public static final String PAIR = "Pair";
+    public static final String HIGH_CARD = "High Card";
+    public static final String FLUSH = "Flush";
+    public static final String STRAIGHT = "Straight";
+    public static final String STRAIGHT_FLUSH = "Straight Flush";
+    public static final String TIE = "Tie";
+
     public String run(List<PokerHands> white, List<PokerHands> black) {
         PokerType whitePokerType = judgePokerType(white);
         whitePokerType.setWinner("White");
         PokerType blackPokerType = judgePokerType(black);
         blackPokerType.setWinner("Black");
         PokerType winnerPoker = compare(whitePokerType, blackPokerType);
-        if (winnerPoker.getWinner().equals("Tie")) {
+        if (winnerPoker.getWinner().equals(TIE)) {
             return "Tie.";
         }
-        return winnerPoker.getWinner();
+        return winnerPoker.getWinner()+" wins. - with "+winnerPoker.getType();
     }
 
     public PokerType compare(PokerType firstPokerType, PokerType secondPokerType) {
@@ -30,7 +41,7 @@ public class Demo {
                 return secondPokerType;
             } else {
                 PokerType poker = new PokerType();
-                poker.setWinner("Tie");
+                poker.setWinner(TIE);
                 return poker;
             }
         } else {
@@ -44,31 +55,31 @@ public class Demo {
     private int calculateLevel(PokerType pokerType) {
         int level = 0;
         switch (pokerType.getType()) {
-            case "High Card":
+            case HIGH_CARD:
                 level = 1;
                 break;
-            case "Pair":
+            case PAIR:
                 level = 2;
                 break;
-            case "Two Pairs":
+            case TWO_PAIRS:
                 level = 3;
                 break;
-            case "Three of a Kind":
+            case THREE_OF_A_KIND:
                 level = 4;
                 break;
-            case "Straight":
+            case STRAIGHT:
                 level = 5;
                 break;
-            case "Flush":
+            case FLUSH:
                 level = 6;
                 break;
-            case "Full House":
+            case FULL_HOUSE:
                 level = 7;
                 break;
-            case "Four of a Kind":
+            case FOUR_OF_A_KIND:
                 level = 8;
                 break;
-            case "Straight Flush":
+            case STRAIGHT_FLUSH:
                 level = 9;
                 break;
             default:
@@ -85,21 +96,21 @@ public class Demo {
         Collections.sort(mapKey);
         if (numberMap.size() == 5) {
             if (isStraight(numberMap) && colorMap.size() == 1) {
-                pokerType.setType("Straight Flush");
+                pokerType.setType(STRAIGHT_FLUSH);
                 pokerType.setMaxNumber(mapKey.get(mapKey.size() - 1));
             } else if (isStraight(numberMap) && colorMap.size() != 1) {
-                pokerType.setType("Straight");
+                pokerType.setType(STRAIGHT);
                 pokerType.setMaxNumber(mapKey.get(mapKey.size() - 1));
             } else if (!isStraight(numberMap) && colorMap.size() == 1) {
-                pokerType.setType("Flush");
+                pokerType.setType(FLUSH);
                 pokerType.setMaxNumber(mapKey.get(mapKey.size() - 1));
             } else {
-                pokerType.setType("High Card");
+                pokerType.setType(HIGH_CARD);
                 pokerType.setMaxNumber(mapKey.get(mapKey.size() - 1));
             }
             return pokerType;
         } else if (numberMap.size() == 4) {
-            pokerType.setType("Pair");
+            pokerType.setType(PAIR);
             for (int index : mapKey) {
                 if (numberMap.get(index).size() == 2) {
                     pokerType.setMaxNumber(index);
@@ -110,13 +121,13 @@ public class Demo {
         } else if (numberMap.size() == 3) {
             for (int index : mapKey) {
                 if (numberMap.get(index).size() == 3) {
-                    pokerType.setType("Three of a Kind");
+                    pokerType.setType(THREE_OF_A_KIND);
                     pokerType.setMaxNumber(index);
                     break;
                 }
             }
             if (Objects.isNull(pokerType.getType())) {
-                pokerType.setType("Two Pairs");
+                pokerType.setType(TWO_PAIRS);
                 Collections.sort(mapKey);
                 for (int i = mapKey.size() - 1; i >= 0; i--) {
                     if (numberMap.get(mapKey.get(i)).size() == 2) {
@@ -129,12 +140,12 @@ public class Demo {
         } else {
             for (int index : mapKey) {
                 if (numberMap.get(index).size() == 4) {
-                    pokerType.setType("Four of a Kind");
+                    pokerType.setType(FOUR_OF_A_KIND);
                     pokerType.setMaxNumber(index);
                     break;
                 }
                 if (numberMap.get(index).size() == 3) {
-                    pokerType.setType("Full House");
+                    pokerType.setType(FULL_HOUSE);
                     pokerType.setMaxNumber(index);
                     break;
                 }
@@ -175,7 +186,7 @@ public class Demo {
                 result = 14;
                 break;
             default:
-                result = Integer.valueOf(input);
+                result = Integer.parseInt(input);
                 break;
         }
         return result;

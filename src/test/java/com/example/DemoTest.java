@@ -36,6 +36,21 @@ public class DemoTest {
     }
 
     @Test
+    void should_return_Black_wins_with_high_card_9_when_run_given_Black_2H_3D_5S_9C_KD_and_White_2C_3H_4S_8C_KH() {
+        //given
+        List<PokerHands> black = asList(new PokerHands(2, "H"), new PokerHands(3, "D"), new PokerHands(5, "S"),
+                new PokerHands(9, "C"), new PokerHands(demo.convet("K"), "D"));
+        List<PokerHands> white = asList(new PokerHands(2, "C"), new PokerHands(3, "H"), new PokerHands(4, "S"),
+                new PokerHands(8, "C"), new PokerHands(demo.convet("K"), "H"));
+
+        //when
+        String result = demo.run(white, black);
+
+        //then
+        assertEquals("Black wins. - with High Card", result);
+    }
+
+    @Test
     void should_return_White_wins_with_Straight_when_run_given_Black_2H_3D_5S_9C_KD_and_White_3C_4H_5S_6C_7H() {
         List<PokerHands> black = asList(new PokerHands(2, "H"), new PokerHands(3, "D"), new PokerHands(5, "S"),
                 new PokerHands(9, "C"), new PokerHands(demo.convet("K"), "D"));

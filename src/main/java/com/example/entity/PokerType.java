@@ -1,16 +1,27 @@
 package com.example.entity;
 
+import java.util.List;
+
 public class PokerType {
     private String type;
     private String winner;
     private int level;
     private int maxNumber;
+    private List<Integer> numbers;
 
     public PokerType() {
     }
 
     public int getMaxNumber() {
         return maxNumber;
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
+    public void setNumbers(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
     public void setMaxNumber(int maxNumber) {

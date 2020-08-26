@@ -40,6 +40,13 @@ public class Demo {
             } else if (firstPokerType.getMaxNumber() < secondPokerType.getMaxNumber()) {
                 return secondPokerType;
             } else {
+                for(int i=firstPokerType.getNumbers().size()-2;i>=0;i--){
+                    if(firstPokerType.getNumbers().get(i)>secondPokerType.getNumbers().get(i)){
+                        return firstPokerType;
+                    }else if(firstPokerType.getNumbers().get(i)<secondPokerType.getNumbers().get(i)){
+                        return secondPokerType;
+                    }
+                }
                 PokerType poker = new PokerType();
                 poker.setWinner(TIE);
                 return poker;
@@ -108,6 +115,7 @@ public class Demo {
                 pokerType.setType(HIGH_CARD);
                 pokerType.setMaxNumber(mapKey.get(mapKey.size() - 1));
             }
+            pokerType.setNumbers(mapKey);
             return pokerType;
         } else if (numberMap.size() == 4) {
             pokerType.setType(PAIR);
@@ -117,6 +125,7 @@ public class Demo {
                     break;
                 }
             }
+            pokerType.setNumbers(mapKey);
             return pokerType;
         } else if (numberMap.size() == 3) {
             for (int index : mapKey) {
@@ -128,7 +137,6 @@ public class Demo {
             }
             if (Objects.isNull(pokerType.getType())) {
                 pokerType.setType(TWO_PAIRS);
-                Collections.sort(mapKey);
                 for (int i = mapKey.size() - 1; i >= 0; i--) {
                     if (numberMap.get(mapKey.get(i)).size() == 2) {
                         pokerType.setMaxNumber(mapKey.get(i));
@@ -136,6 +144,7 @@ public class Demo {
                     }
                 }
             }
+            pokerType.setNumbers(mapKey);
             return pokerType;
         } else {
             for (int index : mapKey) {
@@ -150,6 +159,7 @@ public class Demo {
                     break;
                 }
             }
+            pokerType.setNumbers(mapKey);
             return pokerType;
         }
     }

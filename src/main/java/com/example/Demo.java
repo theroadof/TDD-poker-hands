@@ -13,8 +13,8 @@ public class Demo {
         whitePokerType.setWinner("White");
         PokerType blackPokerType = judgePokerType(black);
         blackPokerType.setWinner("Black");
-        PokerType winnerPoker = compare(whitePokerType,blackPokerType);
-        if(winnerPoker.getWinner().equals("Tie")){
+        PokerType winnerPoker = compare(whitePokerType, blackPokerType);
+        if (winnerPoker.getWinner().equals("Tie")) {
             return "Tie.";
         }
         return winnerPoker.getWinner();
@@ -24,11 +24,11 @@ public class Demo {
         firstPokerType.setLevel(calculateLevel(firstPokerType));
         secondPokerType.setLevel(calculateLevel(secondPokerType));
         if (firstPokerType.getLevel() == secondPokerType.getLevel()) {
-            if(firstPokerType.getMaxNumber() > secondPokerType.getMaxNumber()) {
+            if (firstPokerType.getMaxNumber() > secondPokerType.getMaxNumber()) {
                 return firstPokerType;
-            }else if(firstPokerType.getMaxNumber() < secondPokerType.getMaxNumber()){
+            } else if (firstPokerType.getMaxNumber() < secondPokerType.getMaxNumber()) {
                 return secondPokerType;
-            }else {
+            } else {
                 PokerType poker = new PokerType();
                 poker.setWinner("Tie");
                 return poker;
@@ -45,31 +45,31 @@ public class Demo {
         int level = 0;
         switch (pokerType.getType()) {
             case "High Card":
-                level=1;
+                level = 1;
                 break;
             case "Pair":
-                level=2;
+                level = 2;
                 break;
             case "Two Pairs":
-                level=3;
+                level = 3;
                 break;
             case "Three of a Kind":
-                level=4;
+                level = 4;
                 break;
             case "Straight":
-                level=5;
+                level = 5;
                 break;
             case "Flush":
-                level=6;
+                level = 6;
                 break;
             case "Full House":
-                level=7;
+                level = 7;
                 break;
             case "Four of a Kind":
-                level=8;
+                level = 8;
                 break;
             case "Straight Flush":
-                level=9;
+                level = 9;
                 break;
             default:
                 break;
@@ -96,6 +96,15 @@ public class Demo {
             } else {
                 pokerType.setType("High Card");
                 pokerType.setMaxNumber(mapKey.get(mapKey.size() - 1));
+            }
+            return pokerType;
+        } else if (numberMap.size() == 4) {
+            pokerType.setType("Pair");
+            for (int index : mapKey) {
+                if (numberMap.get(index).size() == 2) {
+                    pokerType.setMaxNumber(index);
+                    break;
+                }
             }
             return pokerType;
         } else {

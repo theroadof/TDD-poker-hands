@@ -36,7 +36,7 @@ public class DemoTest {
     }
 
     @Test
-    void should_return_White_wins_when_run_given_Black_2H_3D_5S_9C_KD_and_White_3C_4H_5S_6C_7H() {
+    void should_return_White_wins_with_Straight_when_run_given_Black_2H_3D_5S_9C_KD_and_White_3C_4H_5S_6C_7H() {
         List<PokerHands> black = asList(new PokerHands(2,"H"),new PokerHands(3,"D"),new PokerHands(5,"S"),
                 new PokerHands(9,"C"),new PokerHands(demo.convet("K"),"D"));
         List<PokerHands> white = asList(new PokerHands(3,"C"),new PokerHands(4,"H"),new PokerHands(5,"S"),
@@ -50,7 +50,7 @@ public class DemoTest {
     }
 
     @Test
-    void should_return_White_wins_when_run_given_Black_2H_3D_5S_9C_KD_and_White_2H_3H_5H_9H_KH() {
+    void should_return_White_wins_with_Flush_when_run_given_Black_2H_3D_5S_9C_KD_and_White_2H_3H_5H_9H_KH() {
         List<PokerHands> black = asList(new PokerHands(2,"H"),new PokerHands(3,"D"),new PokerHands(5,"S"),
                 new PokerHands(9,"C"),new PokerHands(demo.convet("K"),"D"));
         List<PokerHands> white = asList(new PokerHands(2,"H"),new PokerHands(3,"H"),new PokerHands(5,"H"),
@@ -78,7 +78,7 @@ public class DemoTest {
     }
 
     @Test
-    void should_return_White_wins_when_run_given_Black_2H_3D_5S_9C_KD_and_White_3H_4H_5H_6H_7H() {
+    void should_return_White_wins_with_Straight_Flush_when_run_given_Black_2H_3D_5S_9C_KD_and_White_3H_4H_5H_6H_7H() {
         List<PokerHands> black = asList(new PokerHands(2,"H"),new PokerHands(3,"D"),new PokerHands(5,"S"),
                 new PokerHands(9,"C"),new PokerHands(demo.convet("K"),"D"));
         List<PokerHands> white = asList(new PokerHands(3,"H"),new PokerHands(4,"H"),new PokerHands(5,"H"),
@@ -90,6 +90,21 @@ public class DemoTest {
         //then
         assertEquals("White",result);
     }
+
+    @Test
+    void should_return_White_wins_with_Pair_when_run_given_Black_2H_3D_5S_9C_KD_and_White_3H_3D_5S_9C_KD() {
+        List<PokerHands> black = asList(new PokerHands(2,"H"),new PokerHands(3,"D"),new PokerHands(5,"S"),
+                new PokerHands(9,"C"),new PokerHands(demo.convet("K"),"D"));
+        List<PokerHands> white = asList(new PokerHands(3,"H"),new PokerHands(3,"D"),new PokerHands(5,"S"),
+                new PokerHands(9,"C"),new PokerHands(demo.convet("K"),"D"));
+
+        //when
+        String result = demo.run(white,black);
+
+        //then
+        assertEquals("White",result);
+    }
+
 
     @Test
     void test2() {
